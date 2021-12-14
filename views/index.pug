@@ -1,0 +1,13 @@
+html 
+    head 
+        title= myTitle
+        link(href='/myCss.css')
+    body 
+        //- works for all atributes
+        h1(class='myClass', id='myId') this comes #{message}
+        //- works for classes and  ids
+        //- h1.myClass.secondClass#myId this comes #{message}
+        ul 
+            each user in users 
+                li= user.userName + ': ' + user.email
+        include foot.pug
