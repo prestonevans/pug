@@ -15,9 +15,20 @@
 html 
     head 
         title= myTitle
-        link(href='/myCss.css')
+        link(rel='stylesheet' href='myCss.css')
     body 
-        ul 
-        each username in users
-            li
-                a(href='/users/'+username) #{username}
+        table 
+            tr 
+                th Name
+                th Age 
+                th Email 
+                th UID
+            each user in users
+                tr
+                    td= user.name
+                    td= user.age
+                    td= user.email
+                    td= user.uid
+                    td  
+                        a(href='/delete/'+user.uid) Delete
+        a(href='/') Add Another User 
