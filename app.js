@@ -22,6 +22,16 @@ app.get('/users', (req, res) => {
 	})
 });
 
+app.post('/edit', (req, res) => {
+	user = users[users.findIndex(user => user.uid === req.body.uid)]
+	user.name = req.body.name
+	user.email = req.body.email
+	user.age = req.body.age
+	user.uid = req.body.uid
+	res.redirect('/users')
+	res.end()
+})
+
 app.post('/create', (req, res) => {
 	const uid = `${req.body.name}${Math.ceil(Math.random()*1000)}`
 	const user = {
@@ -30,6 +40,7 @@ app.post('/create', (req, res) => {
 		age: req.body.age,
 		uid: uid
 	};
+	console.log(`Created user: ${JSON.stringify(user)}`)
 	users.push(user)
 	res.redirect('/users')
 	fs.appendFile('./log.txt', `${JSON.stringify(user)}\n`, err => {
@@ -47,7 +58,15 @@ app.get('/delete/:uid', (req, res) => {
 	res.end();
 })
 
-app.listen(3002, () => {
+app.get('/edit/:uid', (req, res) => {
+	const user = users.find(user => user.uid === req.params.uid)
+	res.render('edit', {
+		user: user
+	})
+	res.end()
+})
+
+app.listen(3000, () => {
 	console.log('Listening on port 3000');
 });
 
