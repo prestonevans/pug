@@ -1,4 +1,5 @@
 form(method='post', action='/create')
-    input(name='firstName')
-    input(name='lastName')
-    input(type='submit',val='Enter If You Dare')
+    input(required name='name' type='text' placeholder='name')
+    input(required name='email' type='email' placeholder='email')
+    input(required name='age' type='number' placeholder='age')
+    input(type='submit',value='Enter If You Dare')

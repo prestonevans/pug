@@ -22,13 +22,21 @@ app.get('/form', (req, res) => {
 });
 
 app.post('/create', (req, res) => {
+	const timeStamp = new Date();
+	const timeStampString = timeStamp.toUTCString().replace(/\s/g,'')
+	const uid = `${req.body.name}${timeStampString}`
 	const user = {
-		firstName: req.body.firstName,
-		lastName: req.body.lastName
+		name: req.body.name,
+		email: req.body.email,
+		age: req.body.age,
+		uid: uid
 	};
-	res.end(`FirstName: ${user.firstName} LastName = ${user.lastName}`);
+	res.render('index', {
+		users: [ 'brad', 'presto', 'test' ]
+	});
+	res.end(`Name: ${user.name} Email = ${user.email} Age = ${user.age} UID = ${user.uid}`);
 });
 
-app.listen(3000, () => {
+app.listen(3002, () => {
 	console.log('Listening on port 3000');
 });
